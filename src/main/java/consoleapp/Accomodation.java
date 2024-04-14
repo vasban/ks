@@ -1,4 +1,6 @@
-public class Accomodation {
+import java.io.Serializable;
+
+public class Accomodation implements Serializable {
     private String roomName;
     private int nOfPersons;
     private String area;
