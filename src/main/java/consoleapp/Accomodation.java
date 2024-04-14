@@ -63,4 +63,15 @@ public class Accomodation implements Serializable {
         this.nOfReviews = nOfReviews;
     }
 
+    @Override
+    public String toString() {
+        String sPersons = "People";
+        if (nOfPersons == 1)
+            sPersons = "Person";
+
+        return String.format("%s\n%s | %d %s\n%d stars | %d reviews",
+                this.roomName,
+                this.area, this.nOfPersons, sPersons,
+                this.stars, this.nOfReviews);
+    }
 }
