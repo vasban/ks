@@ -2,55 +2,38 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.nio.file.*;
-  
-  
-public class JsonPrsr{
 
+public class JsonPrsr {
 
   // kaleitai eswterika
-  public JSONObject parsakos(String jsonFileName){
-    
-    try{
-      
+  private static JSONObject parser(String jsonFileName) {
+    try {
       String content = new String(Files.readAllBytes(Paths.get(jsonFileName)));
       JSONObject room = new JSONObject(content);
-  
-      return room ;
 
-    }catch(IOException e){
-      
-      e.printStackTrace();  
-      return null;    
+      return room;
+
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
     }
-    
   }
 
-  //kaleis aythn apthn main kai dineis onoma toy json, exw valei to json eksw apto src, isws thelei ligo peiragma sta paths
-  public Accomodation getAccomodationObject(String jsonFileName){
-    
-
-    Accomodation acc = new Accomodation();
-    JSONObject room = parsakos(jsonFileName);
-
-    acc.setRoomName(room.getString("roomName"));
-    acc.setArea(room.getString("area"));
-    acc.setNOfPersons(room.getInt("noOfPersons"));
-    acc.setStars(room.getInt("stars"));
-    acc.setNOfReviews(room.getInt("noOfReviews"));
-    
-
-    System.out.println(acc);
-    return acc;
-
+  // kaleis aythn apthn main kai dineis onoma toy json, exw valei to json eksw
+  // apto src, isws thelei ligo peiragma sta paths
+  public static Accommodation getAccomodationObject(String jsonFileName) {
+    JSONObject room = parser(jsonFileName);
+    return new Accommodation(
+        room.getString("roomName"),
+        room.getInt("noOfPersons"),
+        room.getString("area"),
+        room.getInt("stars"),
+        room.getInt("noOfReviews"));
   }
 
-  public static void main(String args[]){
-
-    JsonPrsr prs = new JsonPrsr();
-    prs.getAccomodationObject("rooms.json");
+  public static void main(String args[]) {
+    System.out.println(
+        getAccomodationObject("src\\main\\java\\consoleapp\\rooms.json"));
 
   }
 }
-    
- 
-
