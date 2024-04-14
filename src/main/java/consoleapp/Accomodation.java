@@ -1,4 +1,7 @@
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.time.LocalDate;
 
 public class Accomodation implements Serializable {
     private String roomName;
@@ -6,6 +9,7 @@ public class Accomodation implements Serializable {
     private String area;
     private int stars;
     private int nOfReviews;
+    private Set<LocalDate> availableDates;
 
     public Accomodation(String roomName, int nOfPersons, String area, int stars, int nOfReviews) {
         this.roomName = roomName;
@@ -13,6 +17,7 @@ public class Accomodation implements Serializable {
         this.area = area;
         this.stars = stars;
         this.nOfReviews = nOfReviews;
+        this.availableDates = new HashSet<LocalDate>();
     }
 
     public Accomodation() {
@@ -21,6 +26,7 @@ public class Accomodation implements Serializable {
         this.area = "";
         this.stars = 0;
         this.nOfReviews = 0;
+        this.availableDates = new HashSet<LocalDate>();
     }
 
     public String getRoomName() {
@@ -61,6 +67,38 @@ public class Accomodation implements Serializable {
 
     public void setNOfReviews(int nOfReviews) {
         this.nOfReviews = nOfReviews;
+    }
+
+    public Set<LocalDate> getAvailableDates() {
+        return this.availableDates;
+    }
+
+    public void setAvailableDates(Set<LocalDate> dates) {
+        this.availableDates.addAll(dates);
+    }
+
+    public void setAvailableDates(LocalDate date) {
+        this.availableDates.add(date);
+    }
+
+    public void setAvailableDates(LocalDate startDate, LocalDate endDate) {
+        for (LocalDate date = startDate; date.isBefore(endDate); date.plusDays(1)) {
+            this.availableDates.add(date);
+        }
+    }
+
+    public void removeAvailableDates(Set<LocalDate> dates) {
+        this.availableDates.removeAll(dates);
+    }
+
+    public void removeAvailableDates(LocalDate date) {
+        this.availableDates.remove(date);
+    }
+
+    public void removeAvailableDates(LocalDate startDate, LocalDate endDate) {
+        for (LocalDate date = startDate; date.isBefore(endDate); date.plusDays(1)) {
+            this.availableDates.remove(date);
+        }
     }
 
     @Override
