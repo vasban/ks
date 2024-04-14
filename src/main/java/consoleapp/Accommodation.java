@@ -3,7 +3,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.time.LocalDate;
 
-public class Accomodation implements Serializable {
+public class Accommodation implements Serializable {
     private String roomName;
     private int nOfPersons;
     private String area;
@@ -11,7 +11,7 @@ public class Accomodation implements Serializable {
     private int nOfReviews;
     private Set<LocalDate> availableDates;
 
-    public Accomodation(String roomName, int nOfPersons, String area, int stars, int nOfReviews) {
+    public Accommodation(String roomName, int nOfPersons, String area, int stars, int nOfReviews) {
         this.roomName = roomName;
         this.nOfPersons = nOfPersons;
         this.area = area;
@@ -20,7 +20,7 @@ public class Accomodation implements Serializable {
         this.availableDates = new HashSet<LocalDate>();
     }
 
-    public Accomodation() {
+    public Accommodation() {
         this.roomName = "";
         this.nOfPersons = 0;
         this.area = "";
