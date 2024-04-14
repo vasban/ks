@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class ManagerApp {
+    private static Scanner input;
 
     private static void mainMenu() {
         int selection = 0;
@@ -15,9 +16,7 @@ public class ManagerApp {
             System.out.println("3 - View registered reservations for your accommodations");
             System.out.println("4 - Quit");
 
-            Scanner input = new Scanner(System.in);
-            selection = input.nextInt();
-            input.close();
+            selection = Integer.parseInt(input.nextLine());
             switch (selection) {
                 case 1:
                     addAccomodation();
@@ -40,16 +39,13 @@ public class ManagerApp {
     }
 
     private static void addAccomodation() {
-        Scanner input = new Scanner(System.in);
         System.out.println("Insert path to json file:\n");
-        String jsonPath = input.next();
-        input.close();
+        String jsonPath = input.nextLine();
         ManagerAppBackend.addAccommodation(jsonPath);
         mainMenu();
     }
 
     private static void addAvailableDates() {
-        Scanner input = new Scanner(System.in);
         int selection;
         Boolean isLoop = true;
         while (isLoop) {
@@ -61,13 +57,12 @@ public class ManagerApp {
             System.out.println("2 - Enter a range of dates");
             System.out.println("3 - Enter dates seperated by commas(\",\")");
             System.out.println("4 - Return");
-            selection = input.nextInt();
+            selection = Integer.parseInt(input.nextLine());
 
             switch (selection) {
                 case 1:
                     System.out.println("Insert date (DD-MM-YYYY):\n");
                     String date = input.nextLine();
-                    input.close();
                     ManagerAppBackend.addAvailableDate(date);
                     break;
                 case 2:
@@ -76,18 +71,15 @@ public class ManagerApp {
                     startDate = input.nextLine();
                     System.out.println("Insert end date (DD-MM-YYYY):\n");
                     endDate = input.nextLine();
-                    input.close();
                     ManagerAppBackend.addAvailableDates(startDate, endDate);
                     break;
                 case 3:
                     System.out.println("Insert dates (DD-MM-YYYY) seperated by commas (\",\"):\n");
                     String dates = input.nextLine();
-                    input.close();
                     ManagerAppBackend.addAvailableDate(dates);
                     break;
                 case 4:
                     System.out.println("Go back.");
-                    input.close();
                     mainMenu();
                     break;
                 default:
@@ -95,6 +87,7 @@ public class ManagerApp {
                     isLoop = true;
             }
         }
+        mainMenu();
     }
 
     private static void getReservations() {
@@ -104,6 +97,8 @@ public class ManagerApp {
     }
 
     public static void main(String[] args) {
+        input = new Scanner(System.in);
         mainMenu();
+        input.close();
     }
 }
