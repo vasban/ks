@@ -1,4 +1,6 @@
-public class Accomodation {
+import java.io.Serializable;
+
+public class Accomodation implements Serializable {
     private String roomName;
     private int nOfPersons;
     private String area;
@@ -61,4 +63,15 @@ public class Accomodation {
         this.nOfReviews = nOfReviews;
     }
 
+    @Override
+    public String toString() {
+        String sPersons = "People";
+        if (nOfPersons == 1)
+            sPersons = "Person";
+
+        return String.format("%s\n%s | %d %s\n%d stars | %d reviews",
+                this.roomName,
+                this.area, this.nOfPersons, sPersons,
+                this.stars, this.nOfReviews);
+    }
 }
